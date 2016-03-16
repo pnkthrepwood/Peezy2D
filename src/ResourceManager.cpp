@@ -49,7 +49,7 @@ SoundBuffer& ResourceManager::getSoundBuffer(string soundPath) {
         ret = (SoundBuffer*)it->second.res;
         ++(it->second.refs);
     } else {
-        DbgLog("Loading texture " << soundPath);
+        DbgLog("Loading soundbuffer " << soundPath);
         ret = new SoundBuffer();
         ret->loadFromFile(soundPath);
         sounds.insert(pair<string,Resource>(soundPath,Resource(ret)));
@@ -63,7 +63,7 @@ void ResourceManager::deleteSoundBuffer(string soundPath) {
         if (--(it->second.refs) < 1) {
             delete (SoundBuffer*)it->second.res;
             sounds.erase(it);
-            DbgLog("Deleted texture " << soundPath);
+            DbgLog("Deleted soundbuffer " << soundPath);
         } 
     }
 }
